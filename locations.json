@@ -1,0 +1,154 @@
+[ 
+    { 
+        "ID": 71, 
+        "title": "EDUARDO JUNQUEIRA NOGUEIRA", 
+        "CIDADE": "Varginha", 
+        "UF": "MG", 
+        "lat": -21.577688, 
+        "lng": -46.091837 
+    }, 
+    { 
+        "ID": 208, 
+        "title": "ARAGUAIA TRANSPORTES E TURISMO LTDA ME", 
+        "CIDADE": "Santana da Vargem", 
+        "UF": "MG", 
+        "lat": -21.29695, 
+        "lng": -45.49309 
+    }, 
+    { 
+        "ID": 1071, 
+        "title": "ANDRE CUSTODIO DE CARVALHO", 
+        "CIDADE": "Três Pontas", 
+        "UF": "MG", 
+        "lat": -21.36955, 
+        "lng": -45.29091 
+    }, 
+    { 
+        "ID": 181, 
+        "title": "URBANO MIRANDA", 
+        "CIDADE": "Coqueiral", 
+        "UF": "MG", 
+        "lat": -21.25221, 
+        "lng": -45.40223 
+    }, 
+    { 
+        "ID": 101, 
+        "title": "PAULO CESAR CAU", 
+        "CIDADE": "Boa Esperança", 
+        "UF": "MG", 
+        "lat": -21.050116, 
+        "lng": -45.70569 
+    }, 
+    { 
+        "ID": 531, 
+        "title": "MAURICIO SILVEIRA COELHO E OUTROS", 
+        "CIDADE": "Perdões", 
+        "UF": "MG", 
+        "lat": -21.08563, 
+        "lng": -44.95214 
+    }, 
+    { 
+        "ID": 265, 
+        "title": "SERGIO BRAGA JUNIOR", 
+        "CIDADE": "Nepomuceno", 
+        "UF": "MG", 
+        "lat": -21.317178, 
+        "lng": -45.339049 
+    }, 
+    { 
+        "ID": 121, 
+        "title": "MARCO AURELIO CORREA DE FIGUEIREDO", 
+        "CIDADE": "Campos Gerais", 
+        "UF": "MG", 
+        "lat": -21.27385, 
+        "lng": -45.6981 
+    }, 
+    { 
+        "ID": 1094, 
+        "title": "SIGRID DE CASTRO FONSECA", 
+        "CIDADE": "Santana da Vargem", 
+        "UF": "MG", 
+        "lat": -21.30023, 
+        "lng": -45.5312 
+    }, 
+    { 
+        "ID": 706, 
+        "title": "SERGIO HENRIQUE PEREIRA NABAK", 
+        "CIDADE": "Nepomuceno", 
+        "UF": "MG", 
+        "lat": -21.29985, 
+        "lng": -45.19485 
+    }, 
+    { 
+        "ID": 966, 
+        "title": "AFRANIO RUBENS DE PAIVA", 
+        "CIDADE": "Boa Esperança", 
+        "UF": "MG", 
+        "lat": -21.06848, 
+        "lng": -45.5423 
+    }, 
+    { 
+        "ID": 1052, 
+        "title": "NILTON CESAR MOSCHEN E OUTROS", 
+        "CIDADE": "Boa Esperança", 
+        "UF": "MG", 
+        "lat": -21.07397, 
+        "lng": -45.62937 
+    }, 
+    { 
+        "ID": 94, 
+        "title": "AGROCP INDUSTRIA E COMERCIO DE FERTILIZANTES LTDA", 
+        "CIDADE": "Três Pontas", 
+        "UF": "MG", 
+        "lat": -21.37624, 
+        "lng": -45.49558 
+    }, 
+    { 
+        "ID": 861, 
+        "title": "QUELFER SEBASTIAO COUTO", 
+        "CIDADE": "Coqueiral", 
+        "UF": "MG", 
+        "lat": -21.18936, 
+        "lng": -45.44278 
+    }, 
+    { 
+        "ID": 424, 
+        "title": "ANTONIO LUCIO GOMES SANTOS JUNIOR", 
+        "CIDADE": "Três Pontas", 
+        "UF": "MG", 
+        "lat": -21.37417, 
+        "lng": -45.513 
+    }, 
+    { 
+        "ID": 1846, 
+        "title": "PA COMERCIO DE CAFE LTDA", 
+        "CIDADE": "Três Pontas", 
+        "UF": "MG", 
+        "lat": -21.40028, 
+        "lng": -45.53559 
+    }, 
+    { 
+        "ID": 173, 
+        "title": "ESPOLIO CIRO MASANOBU TAKAMORI", 
+        "CIDADE": "Alfenas", 
+        "UF": "MG", 
+        "lat": -21.300816, 
+        "lng": -45.957607 
+    }, 
+    { 
+        "ID": 576, 
+        "title": "COLEPACK INDUSTRIA E COMERCIO DE EMBALAGENS LTDA", 
+        "CIDADE": "Três Pontas", 
+        "UF": "MG", 
+        "lat": -21.332946, 
+        "lng": -45.53706 
+    }, 
+    { 
+        "ID": 8727, 
+        "title": "GULOG TRANSPORTES LTDA", 
+        "CIDADE": "Coqueiral", 
+        "UF": "MG", 
+        "lat": -21.19492, 
+        "lng": -45.4364 
+    } 
+] 
