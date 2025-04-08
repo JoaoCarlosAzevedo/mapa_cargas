@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <script src="twebchannel.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abastecimentos</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .sidebar {
+            width: 300px;
+            background-color: white;
+            border-right: 1px solid #ccc;
+            height: 100vh;
+        }
+
+        .header {
+            background-color: #cc0000;
+            color: white;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .search-box {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .supply-list {
+            overflow-y: auto;
+            height: calc(100vh - 180px);
+        }
+
+        .supply-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .supply-item.hidden {
+            display: none;
+        }
+
+        .supply-item input[type="checkbox"] {
+            margin: 0;
+            margin-top: 4px;
+        }
+
+        .supply-details {
+            flex: 1;
+        }
+
+        .supply-type {
+            font-weight: bold;
+        }
+
+        .supply-info {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .bico {
+            color: #666;
+            font-size: 0.8em;
+            margin-top: 3px;
+        }
+
+        .footer {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            background: white;
+        }
+
+        .footer select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        .get-checked-btn {
+            width: 100%;
+            padding: 8px;
+            background-color: #cc0000;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .get-checked-btn:hover {
+            background-color: #aa0000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <div class="header">
+            <h2>ABASTECIMENTOS</h2>
+        </div>
+        <div class="search-box">
+            <input type="text" placeholder="Pesquisar abastecimentos" id="searchInput">
+        </div>
+        <div class="supply-list" id="supplyList">
+        </div>
+        <div class="footer">
+            <select>
+                <option>Data/Hora</option>
+            </select>
+            <button class="get-checked-btn" id="getCheckedBtn">Obter Selecionados</button>
+        </div>
+    </div>
+
+    <script>
+        twebchannel.connect( () => { console.log('Websocket Connected!'); } );
+
+        twebchannel.onReceiveAdvplToJs(function (key, value) {
+            console.log("KEY: " + key + " VALUE: " + value);
+        }); 
+        
+        twebchannel.advplToJs = function(key, value) {
+            console.log("KEY: " + key + " VALUE: " + value);
+            if(key == "JSON") {
+                refreshLocations(value);
+            }  
+        }
+        // Fetch and load the JSON data
+        fetch('data.json')
+            .then(response => response.json())
+            .then(data => {
+                const supplyList = document.getElementById('supplyList');
+
+                // Create supply items
+                data.supplies.forEach((supply, index) => {
+                    const supplyItem = document.createElement('div');
+                    supplyItem.className = 'supply-item';
+                    supplyItem.innerHTML = `
+                        <input type="checkbox" data-index="${index}">
+                        <div class="supply-details">
+                            <div class="supply-type">${supply.type}... ${supply.date}</div>
+                            <div class="supply-info">${supply.driver}... ${supply.time} R$ ${supply.price.toFixed(2)}</div>
+                            <div class="supply-info">${supply.total.toFixed(2)}</div>
+                            <div class="bico">Bico: ${supply.bico}</div>
+                        </div>
+                    `;
+                    supplyList.appendChild(supplyItem);
+                });
+
+                // Implement search functionality
+                const searchInput = document.getElementById('searchInput');
+                searchInput.addEventListener('input', function (e) {
+                    const searchTerm = e.target.value.toLowerCase();
+                    const supplyItems = document.querySelectorAll('.supply-item');
+
+                    supplyItems.forEach(item => {
+                        const text = item.textContent.toLowerCase();
+                        if (text.includes(searchTerm)) {
+                            item.classList.remove('hidden');
+                        } else {
+                            item.classList.add('hidden');
+                        }
+                    });
+                });
+
+                // Get checked items functionality
+                const getCheckedBtn = document.getElementById('getCheckedBtn');
+                getCheckedBtn.addEventListener('click', function () {
+                    const checkedBoxes = document.querySelectorAll('.supply-item input[type="checkbox"]:checked');
+                    const checkedItems = Array.from(checkedBoxes).map(checkbox => {
+                        const index = checkbox.getAttribute('data-index');
+                        return data.supplies[index];
+                    });
+
+                    if (checkedItems.length > 0) {
+                        console.log('Itens selecionados:', checkedItems);
+                        alert(`${checkedItems.length} item(s) selecionado(s)! Verifique o console para detalhes.`);
+                    } else {
+                        alert('Nenhum item selecionado!');
+                    }
+                });
+            })
+            .catch(error => console.error('Error loading data:', error));
+    </script>
+</body>
+
+</html>
