@@ -1,3 +1,6 @@
+import { twebchannel } from './twebchannel.js';
+saudacao();
+
 twebchannel.connect( () => { console.log('Websocket Connected!'); } );
 
 twebchannel.onReceiveAdvplToJs(function (key, value) {
