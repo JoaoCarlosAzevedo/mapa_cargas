@@ -1,6 +1,3 @@
-// Importando a função do arquivo1.js
-import { twebchannel } from './twebchannel.js';
-
 twebchannel.connect( () => { console.log('Websocket Connected!'); } );
 
 twebchannel.onReceiveAdvplToJs(function (key, value) {
