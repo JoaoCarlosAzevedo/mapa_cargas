@@ -189,6 +189,6 @@ var twebchannel = {
 		this.channel.port1.postMessage(message);
 	}
 
-};
+}
 
 export default twebchannel;
