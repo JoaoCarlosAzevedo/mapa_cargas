@@ -19,6 +19,8 @@ twebchannel.advplToJs = function(key, value) {
 } 
 
 
+var data;
+ 
 
 function addItem(json) {
         let item = JSON.parse(json);
@@ -44,7 +46,7 @@ function addItem(json) {
 }
 
 function loadData(json) {  
-    let data = JSON.parse(json);
+    data = JSON.parse(json);
 
     const supplyList = document.getElementById('supplyList');
 
