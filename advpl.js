@@ -13,21 +13,7 @@ twebchannel.advplToJs = function(key, value) {
     }  
 } 
 
-// Implement search functionality
-const searchInput = document.getElementById('searchInput');
-searchInput.addEventListener('input', function (e) {
-    const searchTerm = e.target.value.toLowerCase();
-    const supplyItems = document.querySelectorAll('.supply-item');
 
-    supplyItems.forEach(item => {
-        const text = item.textContent.toLowerCase();
-        if (text.includes(searchTerm)) {
-            item.classList.remove('hidden');
-        } else {
-            item.classList.add('hidden');
-        } 
-    });
-});
 
 function loadData(json) {  
     let data = JSON.parse(json);
@@ -70,6 +56,25 @@ function loadData(json) {
             } else {
                 alert('Nenhum item selecionado!');
             }
+        });
+
+                // Implement search functionality
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', function (e) {
+
+            console.log(e)
+            
+            const searchTerm = e.target.value.toLowerCase();
+            const supplyItems = document.querySelectorAll('.supply-item');
+
+            supplyItems.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                } 
+            });
         });
 
 }
