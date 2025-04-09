@@ -190,3 +190,5 @@ var twebchannel = {
 	}
 
 };
+
+module.exports = { twebchannel };
