@@ -1,5 +1,4 @@
 import { twebchannel } from './twebchannel.js';
-saudacao();
 
 twebchannel.connect( () => { console.log('Websocket Connected!'); } );
 
