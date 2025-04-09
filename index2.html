@@ -139,7 +139,7 @@
             }  
         } 
  
-        function loadData(json) { 
+        function loadData(json) {  
             let data = JSON.parse(json);
 
             const supplyList = document.getElementById('supplyList');
@@ -187,6 +187,9 @@
 
                     if (checkedItems.length > 0) {
                         console.log('Itens selecionados:', checkedItems);
+ 
+                        twebchannel.jsToAdvpl("MARK", checkedItems); 
+
                         alert(`${checkedItems.length} item(s) selecionado(s)! Verifique o console para detalhes.`);
                     } else {
                         alert('Nenhum item selecionado!');
