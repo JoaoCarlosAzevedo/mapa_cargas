@@ -8,12 +8,40 @@ twebchannel.onReceiveAdvplToJs(function (key, value) {
 
 twebchannel.advplToJs = function(key, value) {
     console.log("KEY: " + key + " VALUE: " + value);
+
     if(key == "JSON") {
         loadData(value)
+    }  
+
+    if(key == "ADDITEM") {
+        addItem(value)
     }  
 } 
 
 
+
+function addItem(json) {
+        let item = JSON.parse(json);
+
+        const supplyList = document.getElementById('supplyList');
+
+        let countNew = data.supplies.push(item);
+
+        const supplyItem = document.createElement('div');
+
+        supplyItem.className = 'supply-item';
+        supplyItem.innerHTML = ` 
+            <input type="checkbox" data-index="${countNew - 1 }">
+            <div class="supply-details">
+                <div class="supply-type">${item.type}... ${item.date}</div>
+                <div class="supply-info">${item.driver}... ${item.time} R$ ${item.price.toFixed(2)}</div>
+                <div class="supply-info">${item.total.toFixed(2)}</div>
+                <div class="bico">Bico: ${item.bico}</div>
+            </div>
+        `;
+        supplyList.appendChild(supplyItem);
+
+}
 
 function loadData(json) {  
     let data = JSON.parse(json);
