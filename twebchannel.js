@@ -191,4 +191,4 @@ var twebchannel = {
 
 }
 
-//export default twebchannel;
+export default twebchannel
