@@ -45,7 +45,7 @@ window.onmessage = function(event) {
 }
 
 
-export const twebchannel = {
+var twebchannel = {
 	// Versao
 	version: "1.0.4",
 
@@ -190,3 +190,5 @@ export const twebchannel = {
 	}
 
 };
+
+export default twebchannel;
