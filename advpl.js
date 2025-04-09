@@ -44,11 +44,14 @@ function addItem(json) {
         supplyList.appendChild(supplyItem);
 
 }
-
+ 
 function loadData(json) {  
     data = JSON.parse(json);
 
     const supplyList = document.getElementById('supplyList');
+
+    // Limpar o conteúdo existente
+    supplyList.innerHTML = '';
 
         // Create supply items
         data.supplies.forEach((supply, index) => {
