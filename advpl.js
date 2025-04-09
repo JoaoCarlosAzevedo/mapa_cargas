@@ -58,14 +58,12 @@ function loadData(json) {
             }
         });
 
-                // Implement search functionality
         const searchInput = document.getElementById('searchInput');
         searchInput.addEventListener('input', function (e) {
-
-            console.log(e)
-            
             const searchTerm = e.target.value.toLowerCase();
             const supplyItems = document.querySelectorAll('.supply-item');
+
+            console.log( supplyItems ) 
 
             supplyItems.forEach(item => {
                 const text = item.textContent.toLowerCase();
@@ -73,7 +71,7 @@ function loadData(json) {
                     item.classList.remove('hidden');
                 } else {
                     item.classList.add('hidden');
-                } 
+                }
             });
         });
 
