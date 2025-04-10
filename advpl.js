@@ -85,9 +85,9 @@ function loadData(json) {
 
                 twebchannel.jsToAdvpl("MARK", checkedItems); 
 
-                alert(`${checkedItems.length} item(s) selecionado(s)! Verifique o console para detalhes.`);
+                //alert(`${checkedItems.length} item(s) selecionado(s)! Verifique o console para detalhes.`);
             } else {
-                alert('Nenhum item selecionado!');
+                //alert('Nenhum item selecionado!');
             }
         });
 
