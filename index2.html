@@ -14,22 +14,22 @@
             padding: 0;
             height: 100%;
             overflow: hidden;
-            /* evita scroll da página inteira */
-            font-family: Arial, sans-serif;
+            font-family: "Segoe UI", Roboto, sans-serif;
+            background-color: #f4f4f4;
         }
 
         .sidebar {
             height: 100vh;
             display: flex;
             flex-direction: column;
-            background-color: white;
+            background-color: #fff;
             border-right: 1px solid #ccc;
         }
 
         .header {
             background-color: #cc0000;
             color: white;
-            padding: 10px;
+            padding: 12px;
             text-align: center;
             flex-shrink: 0;
         }
@@ -38,39 +38,49 @@
             padding: 10px;
             border-bottom: 1px solid #ccc;
             flex-shrink: 0;
+            background: #fafafa;
         }
 
         .search-box input {
             width: 100%;
-            padding: 5px;
+            padding: 6px 10px;
             border: 1px solid #ccc;
-            border-radius: 3px;
+            border-radius: 6px;
+            font-size: 0.95rem;
         }
 
         .supply-list {
             flex: 1;
-            /* ocupa todo o espaço disponível */
             overflow-y: auto;
             padding: 10px;
         }
 
         .supply-item {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
+            position: relative;
             display: flex;
             align-items: flex-start;
             gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .supply-item.hidden {
-            display: none;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            background-color: #fff;
+            transition: background 0.2s;
         }
 
+        .supply-item:hover {
+            background-color: #fdfdfd;
+        }
+
+        .supply-item:nth-child(even) {
+            background-color: #fcfcfc;
+        }
 
         .supply-item input[type="checkbox"] {
-            margin-top: 4px;
+            margin-top: 5px;
             flex-shrink: 0;
+            scale: 1.2;
+            accent-color: #cc0000;
         }
 
         .supply-details {
@@ -79,22 +89,51 @@
         }
 
         .supply-type {
-            font-weight: bold;
+            font-weight: 600;
             font-size: 1rem;
-            word-break: break-word;
+            color: #222;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .supply-info {
-            color: #666;
-            font-size: 0.9em;
-            word-break: break-word;
+            font-size: 0.9rem;
+            color: #444;
+            margin-bottom: 3px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .supply-info .label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .supply-info .value {
+            color: #000;
+        }
+
+        .supply-info .destaque {
+            color: #cc0000;
+            font-weight: bold;
         }
 
         .bico {
+            font-size: 0.78rem;
             color: #666;
-            font-size: 0.8em;
-            margin-top: 3px;
-            word-break: break-word;
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        .supply-date {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            font-size: 0.75rem;
+            color: #999;
+            white-space: nowrap;
         }
 
         .footer {
@@ -104,39 +143,48 @@
             flex-shrink: 0;
         }
 
-        .footer select {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-
         .get-checked-btn {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             background-color: #cc0000;
             color: white;
             border: none;
-            border-radius: 3px;
+            border-radius: 4px;
+            font-weight: 600;
             cursor: pointer;
+            font-size: 1rem;
         }
 
         .get-checked-btn:hover {
-            background-color: #aa0000;
+            background-color: #a30000;
         }
 
-        /* Responsividade */
         @media (max-width: 600px) {
+            .supply-item {
+                flex-direction: row;
+                gap: 8px;
+            }
 
             .supply-type,
             .supply-info,
-            .bico {
+            .bico,
+            .supply-date {
                 font-size: 0.85em;
             }
+        }
 
-            .supply-item {
-                flex-direction: column;
-                gap: 5px;
+        @keyframes highlightFade {
+            0% {
+                background-color: #fff3cd;
             }
+
+            100% {
+                background-color: inherit;
+            }
+        }
+
+        .supply-item.newly-added {
+            animation: highlightFade 2s ease-out;
         }
     </style>
 </head>
@@ -152,7 +200,7 @@
         <div class="supply-list" id="supplyList">
         </div>
         <div class="footer">
-          <!--   <select>
+            <!--   <select>
                 <option>Data/Hora</option>
             </select> -->
             <button class="get-checked-btn" id="getCheckedBtn">Gerar Venda</button>
@@ -160,94 +208,7 @@
     </div>
 
     <script>
-       /*  fetch('data.json')
 
-            .then(response => response.json())
-            .then(data => {
-                const supplyList = document.getElementById('supplyList');
-
-                // Create supply items
-                data.supplies.forEach((supply, index) => {
-                    const supplyItem = document.createElement('div');
-                    supplyItem.className = 'supply-item';
-                    supplyItem.innerHTML = `
-                        <input type="checkbox" data-index="${index}">
-                        <div class="supply-details">
-                            <div class="supply-type">${supply.type}... ${supply.date}</div>
-                            <div class="supply-info">${supply.driver}... ${supply.time} R$ ${supply.price.toFixed(2)}</div>
-                            <div class="supply-info">${supply.total.toFixed(2)}</div>
-                            <div class="bico">Bico: ${supply.bico}</div>
-                        </div>
-                    `;
-                    supplyList.appendChild(supplyItem);
-                });
-                function appendSupply(jsonString) {
-                    const newData = JSON.parse(jsonString);
-                    const supplyList = document.getElementById('supplyList');
-
-                    const supplyItem = document.createElement('div');
-                    supplyItem.className = 'supply-item';
-
-                    // Define o novo índice como o comprimento atual da lista original
-                    const index = data.supplies.length;
-                    data.supplies.push(newData); // atualiza o array original
-
-                    supplyItem.innerHTML = `
-                        <input type="checkbox" data-index="${index}">
-                        <div class="supply-details">
-                            <div class="supply-type">${newData.type}... ${newData.date}</div>
-                            <div class="supply-info">${newData.driver}... ${newData.time} R$ ${newData.price.toFixed(2)}</div>
-                            <div class="supply-info">${newData.total.toFixed(2)}</div>
-                            <div class="bico">Bico: ${newData.bico}</div>
-                        </div>
-                    `;
-
-                    supplyList.appendChild(supplyItem);
-                }
-                if (typeof twebchannel !== "undefined") {
-                    twebchannel.advplToJs = function (key, value) {
-                        console.log("KEY: " + key + " VALUE: " + value);
-
-                        if (key === "ADD_SUPPLY") {
-                            appendSupply(value);
-                        }
-                    };
-                }
-
-                // Implement search functionality
-                const searchInput = document.getElementById('searchInput');
-                searchInput.addEventListener('input', function (e) {
-                    const searchTerm = e.target.value.toLowerCase();
-                    const supplyItems = document.querySelectorAll('.supply-item');
-
-                    supplyItems.forEach(item => {
-                        const text = item.textContent.toLowerCase();
-                        if (text.includes(searchTerm)) {
-                            item.classList.remove('hidden');
-                        } else {
-                            item.classList.add('hidden');
-                        }
-                    });
-                });
-
-                // Get checked items functionality
-                const getCheckedBtn = document.getElementById('getCheckedBtn');
-                getCheckedBtn.addEventListener('click', function () {
-                    const checkedBoxes = document.querySelectorAll('.supply-item input[type="checkbox"]:checked');
-                    const checkedItems = Array.from(checkedBoxes).map(checkbox => {
-                        const index = checkbox.getAttribute('data-index');
-                        return data.supplies[index];
-                    });
-
-                    if (checkedItems.length > 0) {
-                        console.log('Itens selecionados:', checkedItems);
-                        alert(`${checkedItems.length} item(s) selecionado(s)! Verifique o console para detalhes.`);
-                    } else {
-                        alert('Nenhum item selecionado!');
-                    }
-                });
-            })
-            .catch(error => console.error('Error loading data:', error)); */
     </script>
 </body>
 
