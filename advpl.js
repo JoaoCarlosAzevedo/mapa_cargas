@@ -62,7 +62,8 @@ function addItem(json) {
         </div>
     `;
 
-  supplyList.prepend(supplyItem); // adiciona no topo
+  // supplyList.prepend(supplyItem); // adiciona no topo
+  supplyList.appendChild(supplyItem); // adiciona no final da lista
 
   // Remove classe de destaque após 2 segundos
   setTimeout(() => {
