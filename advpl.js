@@ -54,7 +54,7 @@ function addItem(json) {
             <div class="supply-info">
                 <span class="label">Total:</span> <span class="value destaque">R$ ${item.total.toFixed(
                   2
-                )}</span> | <span class="label">Frentista:</span> <span class="value"> ${item.tppag} </span>
+                )}</span> | <span class="label">Pagamento:</span> <span class="value"> ${item.tppag} </span>
             </div>
 
             <div class="bico">🚰 Bico: ${item.bico}</div>
@@ -106,8 +106,8 @@ function loadData(json) {
         <div class="supply-info">
             <span class="label">Total:</span> <span class="value destaque">R$ ${supply.total.toFixed(
               2
-            )}</span>
-        </div>
+            )}</span> | <span class="label">Pagamento:</span> <span class="value"> ${item.tppag} </span>
+        </div> 
 
         <div class="bico">🚰 Bico: ${supply.bico}</div>
         <div class="supply-date">${supply.date} - ${supply.time}</div>
