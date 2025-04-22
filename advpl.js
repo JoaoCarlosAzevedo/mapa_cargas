@@ -106,7 +106,7 @@ function loadData(json) {
         <div class="supply-info">
             <span class="label">Total:</span> <span class="value destaque">R$ ${supply.total.toFixed(
               2
-            )}</span> | <span class="label">Pagamento:</span> <span class="value"> ${item.tppag} </span>
+            )}</span> | <span class="label">Pagamento:</span> <span class="value"> ${supply.tppag} </span>
         </div> 
 
         <div class="bico">🚰 Bico: ${supply.bico}</div>
