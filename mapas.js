@@ -80,9 +80,13 @@ function refreshLocations(locationsString) {
                         <br>
                         <b>Produto ${location.produto}</b>
                         <br>
+                        <b>Produto ${location.entrega}</b>
+                        <br>
                         <b>Quant. ${location.quantidade.toFixed(0)}</b>
                         <br>
                         <b>Observação. ${location.obs}</b>
+                        <br>
+                        <b>Observação. ${location.placa}</b>
                         `;
                 // Exibir popup ao passar o mouse
                 marker.on('mouseover', function () {
