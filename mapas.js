@@ -71,7 +71,7 @@ function refreshLocations(locationsString) {
       icon: location.marcado ? customIcons.changed : customIcons.default,
     });
 
-    let popupContent = `
+ /*    let popupContent = `
             <h3>${location.UF} - ${location.CIDADE}</h3>
             <b>${location.title}</b> 
             <br><b>Pedido:</b> ${location.ID}
@@ -80,8 +80,20 @@ function refreshLocations(locationsString) {
             <br><b>Quant.:</b> ${location.quantidade.toFixed(0)}
             <br><b>Obs:</b> ${location.obs}
             <br><b>Veículo:</b> ${location.placa}
-        `;
-
+        `; */
+      let popupContent = `
+        <div style="font-size: 14px; line-height: 1.4; word-break: break-word;">
+        <h3 style="margin: 0;">${location.UF} - ${location.CIDADE}</h3>
+        <b>${location.title}</b> 
+        <div><b>Pedido:</b> ${location.ID}</div>
+        <div><b>Produto:</b> ${location.produto}</div>
+        <div><b>Entrega:</b> ${location.entrega}</div>
+        <div><b>Quant.:</b> ${location.quantidade.toFixed(0)}</div>
+        <div><b>Obs.:</b> ${location.obs}</div>
+        <div><b>Veículo:</b> ${location.placa}</div>
+        </div>
+    `;
+ 
     marker.on("mouseover", () => marker.bindPopup(popupContent).openPopup());
     marker.on("mouseout", () => marker.closePopup());
 
@@ -90,7 +102,7 @@ function refreshLocations(locationsString) {
     });
 
     markersLayer.addLayer(marker); // Adiciona à camada
-  });
+  }); 
 }
 
 // Função para carregar locais   do JSON
