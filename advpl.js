@@ -22,6 +22,28 @@ twebchannel.advplToJs = function (key, value) {
 
 var data;
 
+  // Get checked items functionality
+  const getCheckedBtn = document.getElementById("getCheckedBtn");
+  getCheckedBtn.addEventListener("click", function () {
+    const checkedBoxes = document.querySelectorAll(
+      '.supply-item input[type="checkbox"]:checked'
+    );
+    const checkedItems = Array.from(checkedBoxes).map((checkbox) => {
+      const index = checkbox.getAttribute("data-index");
+      return data.supplies[index];
+    });
+
+    if (checkedItems.length > 0) {
+      console.log("Itens selecionados:", checkedItems);
+
+      twebchannel.jsToAdvpl("MARK", checkedItems);
+
+      //alert(`${checkedItems.length} item(s) selecionado(s)! Verifique o console para detalhes.`);
+    } else {
+      //alert('Nenhum item selecionado!');
+    }
+  });
+  
 function addItem(json) {
   let item = JSON.parse(json);
   const supplyList = document.getElementById("supplyList");
@@ -116,27 +138,7 @@ function loadData(json) {
     supplyList.appendChild(supplyItem);
   });
 
-  // Get checked items functionality
-  const getCheckedBtn = document.getElementById("getCheckedBtn");
-  getCheckedBtn.addEventListener("click", function () {
-    const checkedBoxes = document.querySelectorAll(
-      '.supply-item input[type="checkbox"]:checked'
-    );
-    const checkedItems = Array.from(checkedBoxes).map((checkbox) => {
-      const index = checkbox.getAttribute("data-index");
-      return data.supplies[index];
-    });
 
-    if (checkedItems.length > 0) {
-      console.log("Itens selecionados:", checkedItems);
-
-      twebchannel.jsToAdvpl("MARK", checkedItems);
-
-      //alert(`${checkedItems.length} item(s) selecionado(s)! Verifique o console para detalhes.`);
-    } else {
-      //alert('Nenhum item selecionado!');
-    }
-  });
 
   const searchInput = document.getElementById("searchInput");
   searchInput.addEventListener("input", function (e) {
