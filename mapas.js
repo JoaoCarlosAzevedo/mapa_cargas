@@ -101,8 +101,8 @@ function refreshLocations(locationsString) {
     marker.on("mouseover", () => marker.bindPopup(popupContent).openPopup());
     marker.on("mouseout", () => marker.closePopup());
 
-    marker.on("click", () => {
-      twebchannel.jsToAdvpl("MARK", location.ID);
+    marker.on("click", () => { 
+      twebchannel.jsToAdvpl("MARK", location.recno);
       //twebchannel.jsToAdvpl("MARK", location.peditem);
     });
 
