@@ -5,11 +5,11 @@ twebchannel.connect(() => {
 });
 
 twebchannel.onReceiveAdvplToJs(function (key, value) {
-  console.log("KEY: " + key + " VALUE: " + value);
+
 });
 
 twebchannel.advplToJs = function (key, value) {
-  console.log("KEY: " + key + " VALUE: " + value);
+
 
   if (key == "JSON") {
     loadData(value);
@@ -17,6 +17,10 @@ twebchannel.advplToJs = function (key, value) {
 
   if (key == "ADDITEM") {
     addItem(value);
+  }
+
+  if (key == "GETAFERI") {
+    markAferidos();
   }
 };
 
@@ -34,7 +38,7 @@ var data;
     });
 
     if (checkedItems.length > 0) {
-      console.log("Itens selecionados:", checkedItems);
+ 
 
       twebchannel.jsToAdvpl("MARK", checkedItems);
 
@@ -44,6 +48,22 @@ var data;
     }
   });
   
+function markAferidos() {
+  const checkedBoxes = document.querySelectorAll(
+    '.supply-item input[type="checkbox"]:checked'
+  );
+  const checkedItems = Array.from(checkedBoxes).map((checkbox) => {
+    const index = checkbox.getAttribute("data-index");
+    return data.supplies[index];
+  });
+
+  if (checkedItems.length > 0) {
+
+
+    twebchannel.jsToAdvpl("MARK_AFERIDOS", checkedItems);
+  }  
+}
+
 function addItem(json) {
   let item = JSON.parse(json);
   const supplyList = document.getElementById("supplyList");
@@ -145,7 +165,6 @@ function loadData(json) {
     const searchTerm = e.target.value.toLowerCase();
     const supplyItems = document.querySelectorAll(".supply-item");
 
-    console.log(supplyItems);
 
     supplyItems.forEach((item) => {
       const text = item.textContent.toLowerCase();
