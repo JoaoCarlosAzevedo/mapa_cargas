@@ -102,8 +102,8 @@ function refreshLocations(locationsString) {
     marker.on("mouseout", () => marker.closePopup());
 
     marker.on("click", () => {
-      //twebchannel.jsToAdvpl("MARK", location.ID);
-      twebchannel.jsToAdvpl("MARK", location.peditem);
+      twebchannel.jsToAdvpl("MARK", location.ID);
+      //twebchannel.jsToAdvpl("MARK", location.peditem);
     });
 
     markersLayer.addLayer(marker); // Adiciona à camada
