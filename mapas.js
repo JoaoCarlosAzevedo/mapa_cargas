@@ -88,6 +88,10 @@ function formatQuantidade(q) {
   return Number.isFinite(n) ? n.toFixed(0) : String(q ?? "");
 }
 
+function markButtonLabel(loc) {
+  return loc.marcado === true ? "Desmarcar Pedido" : "Marcar Pedido";
+}
+
 function pedidoDetailsHtml(location) {
   return `
         <b>${location.title}</b>
@@ -118,7 +122,7 @@ function buildGroupedPopupHtml(items) {
   const btn = legendaButtonStyle[first.legenda] || legendaButtonStyle.blue;
   const markBtn = `
             <button type="button" class="mapa-popup-mark" style="margin-top:10px;width:100%;box-sizing:border-box;padding:8px 12px;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;background:${btn.bg};color:${btn.color};">
-              Marcar pedido
+              ${markButtonLabel(first)}
             </button>`;
 
   return `
@@ -146,6 +150,8 @@ function updateGroupedPopupBody(marker) {
   const counter = el.querySelector(".mapa-popup-counter");
   if (body) body.innerHTML = pedidoDetailsHtml(loc);
   if (counter) counter.textContent = `${i + 1} / ${items.length}`;
+  const markBtnEl = el.querySelector(".mapa-popup-mark");
+  if (markBtnEl) markBtnEl.textContent = markButtonLabel(loc);
 }
 
 function attachGroupedPopupNav(marker) {
