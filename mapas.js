@@ -217,7 +217,7 @@ function emitMarkPedido(marker) {
   if (!items || !items.length) return;
   const idx = marker._pedidoIndex ?? 0;
   console.log("MARK: " + JSON.stringify(items[idx]) ); 
-  twebchannel.jsToAdvpl("MARK", items[idx]);
+  twebchannel.jsToAdvpl("MARK", items[idx].recno);
 }
 
 // Função para carregar locais do JSON
